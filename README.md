@@ -23,21 +23,21 @@ Commands:
 
 ```bash
 git clone https://github.com/pwn0sec/PwnXSS
-chmod 755 -R XSSCon
-cd XSSCon
-python3 xsscon.py --help 
+chmod 755 -R PwnXSS
+cd PwnXSS
+python3 pwnxss.py --help 
 ```
 ## Usage
 Basic usage:
 
 ```bash
-python3 xsscon.py -u http://testphp.vulnweb.com
+python3 pwnxss.py -u http://testphp.vulnweb.com
 ```
 <br/>
 Advanced usage:
 
 ```bash
-python3 xsscon.py --help
+python3 pwnxss.py --help
 ```
 
 ## Main features
@@ -76,6 +76,6 @@ v0.5 Release (Final):
 * Now cookies is supported. (--cookie {}) 
 ## Note
 * Sorry for my bad english 
-* if you run xsscon on the win10 terminal you will get an untidy output
+* if you run pwnxss on the win10 terminal you will get an untidy output
 * now it doesn't support DOM
 
