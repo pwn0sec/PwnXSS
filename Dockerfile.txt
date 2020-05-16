@@ -1,0 +1,8 @@
+FROM centos:latest
+RUN yum install python3 -y
+COPY lib /opt/lib/
+COPY pwnxss.py /opt/
+COPY requirements.txt /opt/
+RUN pip3 install -r /opt/requirements.txt
+ENTRYPOINT ["python3", "/opt/pwnxss.py"]
+CMD ["--help"]
