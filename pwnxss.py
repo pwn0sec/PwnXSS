@@ -1,6 +1,6 @@
 '''
 PwnXSS - 2019/2020
-This project was created by Andripwn with Pwn0sec team
+This project was created by Andripwn with Pwn0sec team. 
 Copyright under the MIT license
 '''
 import argparse
