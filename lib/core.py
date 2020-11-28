@@ -66,6 +66,9 @@ class core:
 				req=self.session.post(urljoin(self.url,action),data=keys)
 				if self.payload in req.text:
 					Log.high("Detected XSS (POST) at "+urljoin(self.url,req.url))
+					file = open("xss.txt", "a")
+					file.write(str(req.url)+"\n\n")
+					file.close()
 					Log.high("Post data: "+str(keys))
 				else:
 					Log.info("Parameter page using (POST) payloads but not 100% yet...")
@@ -108,6 +111,9 @@ class core:
 				req=self.session.get(urljoin(self.url,action),params=keys)
 				if self.payload in req.text:
 					Log.high("Detected XSS (GET) at "+urljoin(self.url,req.url))
+					file = open("xss.txt", "a")
+					file.write(str(req.url)+"\n\n")
+					file.close()
 					Log.high("GET data: "+str(keys))
 				else:
 					Log.info("\033[0;35;47m Parameter page using (GET) payloads but not 100% yet...")
@@ -135,6 +141,10 @@ class core:
 					_respon=self.session.get(test)
 					if self.payload in _respon.text or self.payload in self.session.get(query_all).text:
 						Log.high("Detected XSS (GET) at "+_respon.url)
+						file = open("xss.txt", "a")
+						file.write(str(_respon.url)+"\n\n")
+						file.close()
+						
 					else:
 						Log.info("Parameter page using (GET) payloads but not 100% yet...")
 	
