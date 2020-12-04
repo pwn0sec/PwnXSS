@@ -29,7 +29,7 @@ class crawler:
 
 			elif url.startswith("mailto:") or url.startswith("javascript:"):
 				continue
-	# :// will check if that any subdomain or any other domain		
+	# :// will check if there any subdomain or any other domain but it will pass directory		
 			elif url.startswith(base) or "://" not in url :
 				lst.append(urljoin(base,url))
 				self.visited.append(urljoin(base,url))
