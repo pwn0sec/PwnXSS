@@ -23,16 +23,14 @@ class crawler:
 		for obj in isi.find_all("a",href=True):
 			url=obj["href"]
 			
-			if url.startswith("http://") or url.startswith("https://"):
+			
+			if urljoin(base,url) in self.visited:
 				continue
-		
+
 			elif url.startswith("mailto:") or url.startswith("javascript:"):
 				continue
-			
-			elif urljoin(base,url) in self.visited:
-				continue
-				
-			else:
+	# :// will check if there any subdomain or any other domain but it will pass directory		
+			elif url.startswith(base) or "://" not in url :
 				lst.append(urljoin(base,url))
 				self.visited.append(urljoin(base,url))
 			
