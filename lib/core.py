@@ -3,6 +3,8 @@ from random import randint
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin,urlparse,parse_qs,urlencode
 from lib.helper.Log import *
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class core:
 	
@@ -138,7 +140,7 @@ class core:
 					Log.info("Query (GET) : "+test)
 					Log.info("Query (GET) : "+query_all)
 					
-					_respon=self.session.get(test)
+					_respon=self.session.get(test,verify=False)
 					if self.payload in _respon.text or self.payload in self.session.get(query_all).text:
 						Log.high("Detected XSS (GET) at "+_respon.url)
 						file = open("xss.txt", "a")
