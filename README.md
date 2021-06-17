@@ -3,7 +3,7 @@
 A powerful XSS scanner made in python 3.7<br/>
 
 
-## Installing
+## Installing 
 
 Requirements: <br/>
 
