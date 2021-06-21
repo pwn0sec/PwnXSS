@@ -42,12 +42,12 @@ class crawler:
 		urls=self.getLinks(base,proxy,headers,cookie)
 		
 		for url in urls:
-			
-			p=Process(target=core.main, args=(url,proxy,headers,level,cookie,method))
-			p.start()
-			p.join()
-			if depth != 0:
-				self.crawl(url,depth-1,base,proxy,level,method,cookie)
-				
-			else:
-				break	
+			if url.startswith("https://") or url.startswith("http://"):
+				p=Process(target=core.main, args=(url,proxy,headers,level,cookie,method))
+				p.start()
+				p.join()
+				if depth != 0:
+					self.crawl(url,depth-1,base,proxy,level,method,cookie)
+					
+				else:
+					break	
