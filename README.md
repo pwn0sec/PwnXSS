@@ -12,7 +12,7 @@ Requirements: <br/>
 ```bash
 pip install bs4
 ```
-<li> requests </li>
+<li> requests </li> 
 
 ```bash
 pip install requests
