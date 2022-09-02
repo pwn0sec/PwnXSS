@@ -40,6 +40,19 @@ Advanced usage:
 python3 pwnxss.py --help
 ```
 
+## Usage with Docker
+
+Building the Docker image from the Dockerfile:
+```
+docker build -t pwnxss .
+````
+
+And then running the container that will execute the pwnxss.py script:
+
+```
+docker run pwnxss -u http://testphp.vulnweb.com
+```
+
 ## Main features
 
 * crawling all links on a website ( crawler engine )
