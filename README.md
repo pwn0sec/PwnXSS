@@ -42,7 +42,8 @@ python3 pwnxss.py --help
 
 ## Usage with Docker
 
-```docker build -t pwnxss .
+```
+docker build -t pwnxss .
 docker run pwnxss -u http://testphp.vulnweb.com
 ```
 
