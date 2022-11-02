@@ -44,17 +44,21 @@ def start():
 	pos_opt.add_argument("--proxy",default=None,metavar="",help="Set proxy (e.g. {'https':'https://10.10.1.10:1080'})")
 	pos_opt.add_argument("--about",action="store_true",help="Print information about PwnXSS tool")
 	pos_opt.add_argument("--cookie",help="Set cookie (e.g {'ID':'1094200543'})",default='''{"ID":"1094200543"}''',metavar="")
-	
+	pos_opt.add_argument("--ssl",help="Put False to disable the ssl verification",default=True,metavar="")
+
 	getopt=parse.parse_args()
+	if getopt.ssl == "false" or getopt.ssl == "False":
+		getopt.ssl = False
+
 	print(logo)
 	Log.info("Starting PwnXSS...")
 	if getopt.u:
-		core.main(getopt.u,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
-		
-		crawler.crawl(getopt.u,int(getopt.depth),getopt.proxy,getopt.user_agent,check(getopt),getopt.method,getopt.cookie)
-		
+		core.main(getopt.u,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.ssl,getopt.method)
+
+		crawler.crawl(getopt.u,int(getopt.depth),getopt.proxy,getopt.user_agent,check(getopt),getopt.method,getopt.cookie, getopt.ssl)
+
 	elif getopt.single:
-		core.main(getopt.single,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
+		core.main(getopt.single,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.ssl,getopt.method)
 		
 	elif getopt.about:
 		print("""
