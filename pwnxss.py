@@ -1,5 +1,5 @@
 '''
-PwnXSS - 2019/2020
+PwnXSS - 2019/2022
 This project was created by Andripwn with Pwn0sec team.
 Copyright under the MIT license
 '''
@@ -13,6 +13,16 @@ epilog="""
 Github: https://www.github.com/pwn0sec/PwnXSS
 Version: 0.5 Final
 """
+def str2bool(v):
+	if isinstance(v, bool):
+		return v
+	if v.lower() in ('yes', 'true', 't', 'y', '1'):
+		return True
+	elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+		return False
+	else:
+		raise argparse.ArgumentTypeError('Boolean value expected.')
+
 def check(getopt):
 	payload=int(getopt.payload_level)
 	if payload > 6 and getopt.payload is None:
@@ -44,17 +54,18 @@ def start():
 	pos_opt.add_argument("--proxy",default=None,metavar="",help="Set proxy (e.g. {'https':'https://10.10.1.10:1080'})")
 	pos_opt.add_argument("--about",action="store_true",help="Print information about PwnXSS tool")
 	pos_opt.add_argument("--cookie",help="Set cookie (e.g {'ID':'1094200543'})",default='''{"ID":"1094200543"}''',metavar="")
+	pos_opt.add_argument("--ssl-verify", type=str2bool, nargs='?',const=True, default=True,help="SSL Certificate Verification. Default: True")
 	
 	getopt=parse.parse_args()
 	print(logo)
 	Log.info("Starting PwnXSS...")
 	if getopt.u:
-		core.main(getopt.u,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
+		core.main(getopt.u,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method,getopt.ssl_verify)
 		
-		crawler.crawl(getopt.u,int(getopt.depth),getopt.proxy,getopt.user_agent,check(getopt),getopt.method,getopt.cookie)
+		crawler.crawl(getopt.u,int(getopt.depth),getopt.proxy,getopt.user_agent,check(getopt),getopt.method,getopt.cookie,getopt.ssl_verify)
 		
 	elif getopt.single:
-		core.main(getopt.single,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
+		core.main(getopt.single,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method,getopt.ssl_verify)
 		
 	elif getopt.about:
 		print("""
@@ -62,7 +73,7 @@ def start():
 Project: PwnXSS
 License: MIT
 Author: Security Executions Code
-Last updates: 2019 may 26
+Last updates: 2022 Dec 30
 Note: Take your own RISK
 ****************
 """+epilog)

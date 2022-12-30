@@ -154,13 +154,13 @@ class core:
 						Log.info("URL is not an HTTP url, ignoring")
 	
 	@classmethod
-	def main(self,url,proxy,headers,payload,cookie,method=2):
+	def main(self,url,proxy,headers,payload,cookie,method=2,ssl_verify=True):
 	
 		print(W+"*"*15)
 		self.payload=payload
 		self.url=url
 		
-		self.session=session(proxy,headers,cookie)
+		self.session=session(proxy,headers,cookie,ssl_verify)
 		Log.info("Checking connection to: "+Y+url)	
 		try:
 			ctr=self.session.get(url)
