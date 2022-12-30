@@ -160,9 +160,7 @@ class core:
 		self.payload=payload
 		self.url=url
 		
-		self.session=session(proxy,headers,cookie)
-		if ssl_verify == False:
-			self.session.verify = False
+		self.session=session(proxy,headers,cookie,ssl_verify)
 		Log.info("Checking connection to: "+Y+url)	
 		try:
 			ctr=self.session.get(url)
