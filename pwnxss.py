@@ -60,12 +60,12 @@ def start():
 	print(logo)
 	Log.info("Starting PwnXSS...")
 	if getopt.u:
-		core.main(getopt.u,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
+		core.main(getopt.u,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method,getopt.ssl_verify)
 		
-		crawler.crawl(getopt.u,int(getopt.depth),getopt.proxy,getopt.user_agent,check(getopt),getopt.method,getopt.cookie)
+		crawler.crawl(getopt.u,int(getopt.depth),getopt.proxy,getopt.user_agent,check(getopt),getopt.method,getopt.cookie,getopt.ssl_verify)
 		
 	elif getopt.single:
-		core.main(getopt.single,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
+		core.main(getopt.single,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method,getopt.ssl_verify)
 		
 	elif getopt.about:
 		print("""
