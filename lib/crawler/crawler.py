@@ -15,9 +15,7 @@ class crawler:
 
 		lst=[]
 	
-		conn=session(proxy,headers,cookie)
-		if ssl_verify == False:
-			conn.verify = False
+		conn=session(proxy,headers,cookie,ssl_verify)
 		text=conn.get(base).text
 		isi=BeautifulSoup(text,"html.parser")
 	
