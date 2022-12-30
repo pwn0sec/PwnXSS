@@ -11,11 +11,13 @@ class crawler:
 	visited=[]
 	
 	@classmethod
-	def getLinks(self,base,proxy,headers,cookie):
+	def getLinks(self,base,proxy,headers,cookie,ssl_verify):
 
 		lst=[]
 	
 		conn=session(proxy,headers,cookie)
+		if ssl_verify == False:
+			conn.verify = False
 		text=conn.get(base).text
 		isi=BeautifulSoup(text,"html.parser")
 	
@@ -37,17 +39,17 @@ class crawler:
 		return lst
 
 	@classmethod
-	def crawl(self,base,depth,proxy,headers,level,method,cookie):
+	def crawl(self,base,depth,proxy,headers,level,method,cookie,ssl_verify):
 
-		urls=self.getLinks(base,proxy,headers,cookie)
+		urls=self.getLinks(base,proxy,headers,cookie,ssl_verify)
 		
 		for url in urls:
 			if url.startswith("https://") or url.startswith("http://"):
-				p=Process(target=core.main, args=(url,proxy,headers,level,cookie,method))
+				p=Process(target=core.main, args=(url,proxy,headers,level,cookie,method,ssl_verify))
 				p.start()
 				p.join()
 				if depth != 0:
-					self.crawl(url,depth-1,base,proxy,level,method,cookie)
+					self.crawl(url,depth-1,base,proxy,level,method,cookie,ssl_verify)
 					
 				else:
 					break	
